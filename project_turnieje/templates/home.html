@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Strona domowa<br>
+
+<table border='1'>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Ilość graczy</th>
+        <th>Data rozpoczęcia</th>
+        <th>Autor</th>
+    </tr>
+    {%  for turniej in turnieje %}
+    <tr>
+        <td>{{ turniej.id }}</td>
+        <td>{{ turniej.nazwa }}</td>
+        <td>{{ turniej.ilosc_graczy }}</td>
+        <td>{{ turniej.data_rozpoczecia }}</td>
+        <td>{{ turniej.autor }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

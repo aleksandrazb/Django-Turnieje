@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action='/szukaj/' method='GET'> {% csrf_token %}
+    Od: <input type='date' name='szukaj_od' >
+    Do: <input type='date' name='szukaj_do' >
+    <input type='submit' value='Szukaj'>
+</form>
+<h4>Wyniki {{ szukaj }}</h4>
+
+<table border='1'>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Ilość graczy</th>
+        <th>Data rozpoczęcia</th>
+        <th>Autor</th>
+    </tr>
+    {%  for turniej in turnieje %}
+    <tr>
+        <td>{{ turniej.id }}</td>
+        <td>{{ turniej.nazwa }}</td>
+        <td>{{ turniej.ilosc_graczy }}</td>
+        <td>{{ turniej.data_rozpoczecia }}</td>
+        <td>{{ turniej.autor }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
