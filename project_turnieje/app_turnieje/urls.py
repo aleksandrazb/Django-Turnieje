@@ -28,4 +28,5 @@ urlpatterns = [
     path('dodaj_gracza/', views.dodaj_gracza_view, name='dodaj_gracza_view'),
     path('lista_graczy/', views.gracze_view, name='gracze_view'),
     path('usun_gracza/<gracz_id>/<turniej_id>', views.usun_gracza_view, name='usun_gracza_view'),
+    path('lista_turniejow/<turniej_id>/', views.szczegoly_turnieju_view, name='szczegoly_turnieju_view'),
 ]

@@ -40,3 +40,15 @@ def usun_turniej_view(request, turniej_id):
         'title': 'Usunięto'
     }
     return redirect(turnieje_view)
+
+
+def szczegoly_turnieju_view(request, turniej_id):
+    print(request.user)
+    turniej = Turnieje.objects.get(id=turniej_id)
+
+    data = {
+        'turniej': turniej,
+        'name': request.user,
+        'title': 'Szczególy turnieju'
+    }
+    return render(request, 'szczegoly_turnieju.html', data)

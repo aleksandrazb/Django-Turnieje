@@ -1,8 +1,6 @@
 from django.db import models
 from django.urls import reverse
 
-from ..models import Turnieje
-
 
 class Gracze(models.Model):
     id = models.AutoField(db_index=True, primary_key=True)

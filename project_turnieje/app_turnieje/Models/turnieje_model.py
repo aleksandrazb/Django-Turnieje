@@ -5,7 +5,8 @@ from django.urls import reverse
 class Turnieje(models.Model):
     id = models.AutoField(db_index=True, primary_key=True)
     nazwa = models.CharField(max_length=20)
-    ilosc_graczy = models.IntegerField()
+    ilosc_graczy = models.IntegerField(choices=[(1, '2'), (2, '4'), (3, '6'), (4, '8'), (5, '10'), (6, '12'), (7, '14'),
+                                                (8, '16'), (9, '18'), (10, '20'), (11, '22'), (12, '24')])
     data_rozpoczecia = models.DateTimeField()
     autor = models.CharField(max_length=20, default='Anonymus')
 
