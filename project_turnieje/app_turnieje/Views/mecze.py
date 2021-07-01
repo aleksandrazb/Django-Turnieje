@@ -30,11 +30,12 @@ def edytuj_mecz_view(request, id_meczu):  # TODO: zapisywanie zmienionych danych
         'wynik_gracza2': mecz.wynik_gracza2,
         'wygrana': mecz.wygrana
     }
+    print(init)
     form = MeczeForm(initial=init)
 
     if request.POST:
-        form = MeczeForm(request.POST, instance=mecz)
         if form.is_valid():
+            form = MeczeForm(request.POST or None)
             form.save()
 
         data = {

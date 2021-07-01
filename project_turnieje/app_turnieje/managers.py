@@ -26,7 +26,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-        extra_fields.setdefault('has_module_perms', True)
+        #extra_fields.setdefault('has_module_perms', True)
         extra_fields.setdefault('has_perms', True)
 
         if extra_fields.get('is_staff') is not True:
