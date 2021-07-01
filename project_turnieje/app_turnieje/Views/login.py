@@ -1,10 +1,18 @@
 from django.shortcuts import render
+from ..forms import RejestracjaForm
 
 
-def login(request):
+
+def register_user(request):
     print(request.user)
+    form = RejestracjaForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+
     data = {
+        'form': form,
         'name': request.user,
-        'title': 'Login'
+        'title': 'Rejestracja'
     }
-    return render(request, 'login.html', data)
+    return render(request, 'rejestracja.html', data)

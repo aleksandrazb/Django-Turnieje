@@ -1,5 +1,5 @@
 from .Views.home import home
-from .Views.login import login
+from .Views.login import register_user
 
 from .Views.turnieje import turniej_create_view, usun_turniej_view, turnieje_view
 from .Views.szukaj import szukaj_list_view
@@ -9,7 +9,7 @@ from .Views.mecze import mecze_view, edytuj_mecz_view
 
 __all__ = [
    'home',
-   'login',
+   'register_user',
 
    'turniej_create_view',
    'usun_turniej_view',
