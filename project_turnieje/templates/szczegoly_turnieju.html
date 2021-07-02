@@ -2,11 +2,13 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    Turniej {{turniej.nazwa}}<br>
-    ID {{ turniej.id }}<br>
-    Ilość graczy {{ turniej.ilosc_graczy }}<br>
-    Data rozpoczęcia {{ turniej.data_rozpoczecia }}<br>
-    Autor {{ turniej.autor }}<br>
+    {%  for turniej in turnieje %}
+        Turniej {{ turniej.nazwa }}<br>
+        ID {{ turniej.id }}<br>
+        Ilość graczy {{ turniej.ilosc_graczy }}<br>
+        Data rozpoczęcia {{ turniej.data_rozpoczecia }}<br>
+        Autor {{ turniej.autor }}<br>
+    {% endfor %}
     <br>
     Mecze<br>
     <table border='1'>

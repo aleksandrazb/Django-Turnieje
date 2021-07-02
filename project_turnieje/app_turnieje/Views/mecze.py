@@ -8,11 +8,12 @@ from django.contrib.auth.decorators import login_required
 def mecze_view(request, turniej_id):
     print(request.user)
     mecze = Mecze.objects.filter(id_turnieju=turniej_id)
-    turniej = Turnieje.objects.filter(id=turniej_id)
+    turnieje = Turnieje.objects.filter(id=turniej_id)
+    print(turnieje)
 
     data = {
         'mecze': mecze,
-        'turniej': turniej,
+        'turnieje': turnieje,
         'turniej_id': turniej_id,
         'name': request.user,
         'title': 'Szczegóły turnieju'
