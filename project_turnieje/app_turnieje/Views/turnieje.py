@@ -28,6 +28,7 @@ def turniej_create_view(request):
     form = TurniejeForm(request.POST or None, initial=init)
     if form.is_valid():
         form.save()
+        return redirect(turnieje_view)
     data = {
         'form': form,
         'name': request.user.login,

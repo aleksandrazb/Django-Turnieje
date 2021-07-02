@@ -57,3 +57,38 @@ def edytuj_mecz_view(request, id_meczu):  # TODO: zapisywanie zmienionych danych
             'edit': mecz
         }
         return render(request, 'edytuj_mecz.html', data)
+
+
+@login_required(login_url="login")
+def dodaj_mecz_view(request, turniej_id):
+    print(request.user)
+    init = {
+        'id_turnieju': turniej_id
+    }
+    form = MeczeForm(initial=init)
+
+    if form.is_valid():
+        form = MeczeForm(request.POST or None)
+        form.save()
+        return redirect(mecze_view)
+    data = {
+        'form': form,
+        'name': request.user.login,
+        'title': 'Stwórz mecz'
+    }
+    return render(request, 'edytuj_mecz.html', data)
+
+
+@login_required(login_url="login")
+def usun_mecz_view(request, id_meczu):
+    print(request.user)
+
+    mecz = Mecze.objects.get(id=id_meczu)
+    mecz.delete()
+
+    data = {
+        'name': request.user.login,
+        'title': 'Szczegóły turnieju'
+    }
+    return redirect(mecze_view)
+

@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    Lista turniejów<br>
+<h3>Lista turniejów</h3><br>
 
     <table border='1'>
         <tr>
@@ -28,6 +28,9 @@
         </tr>
         {% endfor %}
     </table>
+    <form action="{% url 'turniej_create_view' %}" method="POST"> {% csrf_token %}
+        <button type="submit">Dodaj turniej</button>
+    </form>
 {% else %}
     <a href="/login">Zaloguj się</a>
 {% endif %}

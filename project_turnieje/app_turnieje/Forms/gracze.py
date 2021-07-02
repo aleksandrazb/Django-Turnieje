@@ -7,6 +7,5 @@ class GraczeForm(forms.ModelForm):
         model = Gracze
         fields = [
             'imie',
-            'nazwisko',
-            'id_turnieju'
+            'nazwisko'
         ]

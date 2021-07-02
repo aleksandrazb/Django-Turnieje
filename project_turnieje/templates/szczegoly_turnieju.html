@@ -3,7 +3,7 @@
 {% block content %}
 {% if user.is_authenticated %}
     {%  for turniej in turnieje %}
-        Turniej {{ turniej.nazwa }}<br>
+<h3>Turniej {{ turniej.nazwa }}</h3><br>
         ID {{ turniej.id }}<br>
         Ilość graczy {{ turniej.ilosc_graczy }}<br>
         Data rozpoczęcia {{ turniej.data_rozpoczecia }}<br>
@@ -34,10 +34,17 @@
             <td>{{ mecz.wygrana }}</td>
             <td><form action="{% url 'edytuj_mecz_view' mecz.id %}" method="POST"> {% csrf_token %}
                     <button type="submit">Edytuj</button>
+            </form>
+            <form action="{% url 'usun_mecz_view' mecz.id %}" method="POST"> {% csrf_token %}
+                    <button type="submit">Usun</button>
             </form></td>
         </tr>
         {% endfor %}
     </table>
+    </br>
+    <form action="{% url 'dodaj_mecz_view' turniej_id %}" method="POST"> {% csrf_token %}
+        <button type="submit">Dodaj mecz</button>
+    </form>
 {% else %}
     <a href="/login">Zaloguj się</a>
 {% endif %}

@@ -4,6 +4,7 @@ from ..models import Mecze
 
 
 class MeczeForm(forms.ModelForm):
+    #id_turnieju = forms.CharField(disabled=True)
 
     class Meta:
         model = Mecze

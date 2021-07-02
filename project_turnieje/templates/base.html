@@ -7,8 +7,16 @@
 <body>
 
     <h4>Zalogowany jako {{name}}</h4>
+    {% if user.is_authenticated %}
+        <a href="/logout">Wyloguj się</a></br>
+        <a href="/lista_turniejow">Lista turniejow</a></br>
+        <a href="/lista_graczy">Lista graczy</a></br>
+    {% else %}
+        <a href="/login">Zaloguj się</a></br>
+    {% endif %}
 
     {% block content %}
+
 
     {% endblock %}
 </body>

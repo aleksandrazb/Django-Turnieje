@@ -27,6 +27,7 @@ def dodaj_gracza_view(request):
 
     if form.is_valid():
         form.save()
+        return redirect(gracze_view)
     data = {
         'form': form,
         'name': request.user,
@@ -36,26 +37,12 @@ def dodaj_gracza_view(request):
 
 
 @login_required(login_url="login")
-def usun_gracza_view(request, gracz_id, turniej_id):
+def usun_gracza_view(request, gracz_id):
     print(request.user)
     print("USUN GRACZA")
-
-    gracze = Gracze.objects.all()
     gracz = Gracze.objects.get(id=gracz_id)
-
-    teraz = datetime.datetime.now()
-    teraz = pytz.utc.localize(teraz)
-    turniej = Turnieje.objects.filter(id=turniej_id, data_rozpoczecia__gt=teraz)
-    print("turniej")
-    print(turniej)
     print("gracz")
     print(gracz)
-    if turniej:
-        gracz.delete()
+    gracz.delete()
 
-    data = {
-        'gracze': gracze,
-        'name': request.user,
-        'title': 'Dodaj gracza'
-    }
     return redirect(gracze_view)
