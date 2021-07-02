@@ -1,39 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Turniej {{turniej.nazwa}}<br>
-ID {{ turniej.id }}<br>
-Ilość graczy {{ turniej.ilosc_graczy }}<br>
-Data rozpoczęcia {{ turniej.data_rozpoczecia }}<br>
-Autor {{ turniej.autor }}<br>
-<br>
-Mecze<br>
-<table border='1'>
-    <tr>
-        <th>ID</th>
-        <th>ID turnieju</th>
-        <th>Faza</th>
-        <th>ID gracza 1</th>
-        <th>ID gracza 2</th>
-        <th>Wynik gracza 1</th>
-        <th>Wynik gracza 2</th>
-        <th>ID zwycięzcy</th>
-    </tr>
-    {%  for mecz in mecze %}
-    <tr>
-        <td>{{ mecz.id }}</td>
-        <td>{{ mecz.id_turnieju }}</td>
-        <td>{{ mecz.faza }}</td>
-        <td>{{ mecz.id_gracza1 }}</td>
-        <td>{{ mecz.id_gracza2 }}</td>
-        <td>{{ mecz.wynik_gracza1 }}</td>
-        <td>{{ mecz.wynik_gracza2 }}</td>
-        <td>{{ mecz.wygrana }}</td>
-        <td><form action="{% url 'edytuj_mecz_view' mecz.id %}" method="POST"> {% csrf_token %}
-                <button type="submit">Edytuj</button>
-        </form></td>
-    </tr>
-    {% endfor %}
-</table>
-
+{% if user.is_authenticated %}
+    Turniej {{turniej.nazwa}}<br>
+    ID {{ turniej.id }}<br>
+    Ilość graczy {{ turniej.ilosc_graczy }}<br>
+    Data rozpoczęcia {{ turniej.data_rozpoczecia }}<br>
+    Autor {{ turniej.autor }}<br>
+    <br>
+    Mecze<br>
+    <table border='1'>
+        <tr>
+            <th>ID</th>
+            <th>ID turnieju</th>
+            <th>Faza</th>
+            <th>ID gracza 1</th>
+            <th>ID gracza 2</th>
+            <th>Wynik gracza 1</th>
+            <th>Wynik gracza 2</th>
+            <th>ID zwycięzcy</th>
+        </tr>
+        {%  for mecz in mecze %}
+        <tr>
+            <td>{{ mecz.id }}</td>
+            <td>{{ mecz.id_turnieju }}</td>
+            <td>{{ mecz.faza }}</td>
+            <td>{{ mecz.id_gracza1 }}</td>
+            <td>{{ mecz.id_gracza2 }}</td>
+            <td>{{ mecz.wynik_gracza1 }}</td>
+            <td>{{ mecz.wynik_gracza2 }}</td>
+            <td>{{ mecz.wygrana }}</td>
+            <td><form action="{% url 'edytuj_mecz_view' mecz.id %}" method="POST"> {% csrf_token %}
+                    <button type="submit">Edytuj</button>
+            </form></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <a href="/login">Zaloguj się</a>
+{% endif %}
 {% endblock %}

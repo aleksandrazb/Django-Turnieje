@@ -1,28 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Lista graczy<br>
+{% if user.is_authenticated %}
+    Lista graczy<br>
 
 
-<table border='1'>
-    <tr>
-        <th>ID</th>
-        <th>Imię</th>
-        <th>Nazwisko</th>
-        <th>ID turnieju</th>
-    </tr>
-    {%  for gracz in gracze %}
-    <tr>
-        <td>{{ gracz.id }}</td>
-        <td>{{ gracz.imie }}</td>
-        <td>{{ gracz.nazwisko }}</td>
-        <td>{{ gracz.id_turnieju }}</td>
-        <td><form action="{% url 'usun_gracza_view' gracz.id gracz.id_turnieju %}" method="POST"> {% csrf_token %}
-                <button type="submit">Usuń gracza</button>
-        </form></td>
-    </tr>
-    {% endfor %}
-</table>
-
+    <table border='1'>
+        <tr>
+            <th>ID</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>ID turnieju</th>
+        </tr>
+        {%  for gracz in gracze %}
+        <tr>
+            <td>{{ gracz.id }}</td>
+            <td>{{ gracz.imie }}</td>
+            <td>{{ gracz.nazwisko }}</td>
+            <td>{{ gracz.id_turnieju }}</td>
+            <td><form action="{% url 'usun_gracza_view' gracz.id gracz.id_turnieju %}" method="POST"> {% csrf_token %}
+                    <button type="submit">Usuń gracza</button>
+            </form></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <a href="/login">Zaloguj się</a>
+{% endif %}
 
 {% endblock %}
