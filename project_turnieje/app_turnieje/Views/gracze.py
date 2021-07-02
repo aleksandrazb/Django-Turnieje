@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 from ..forms import GraczeForm
 from ..models import Gracze
 from ..models import Turnieje
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="login")
 def gracze_view(request):
     print(request.user)
     gracze = Gracze.objects.all()
@@ -18,6 +20,7 @@ def gracze_view(request):
     return render(request, 'lista_graczy.html', data)
 
 
+@login_required(login_url="login")
 def dodaj_gracza_view(request):
     print(request.user)
     form = GraczeForm(request.POST or None)
@@ -32,6 +35,7 @@ def dodaj_gracza_view(request):
     return render(request, 'dodaj_gracza.html', data)
 
 
+@login_required(login_url="login")
 def usun_gracza_view(request, gracz_id, turniej_id):
     print(request.user)
     print("USUN GRACZA")

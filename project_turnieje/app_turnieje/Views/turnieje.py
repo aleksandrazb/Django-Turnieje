@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from ..forms import TurniejeForm
 from ..models import Turnieje, Uzytkownicy
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="login")
 def turnieje_view(request):
     print(request.user)
     turnieje = Turnieje.objects.all()
@@ -15,6 +17,7 @@ def turnieje_view(request):
     return render(request, 'lista_turniejow.html', data)
 
 
+@login_required(login_url="login")
 def turniej_create_view(request):
     print(request.user)
     init = {
@@ -31,6 +34,7 @@ def turniej_create_view(request):
     return render(request, 'stworz_turniej.html', data)
 
 
+@login_required(login_url="login")
 def usun_turniej_view(request, turniej_id):
     print(request.user)
     turnieje = Turnieje.objects.all()

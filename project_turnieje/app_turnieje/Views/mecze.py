@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from ..forms import MeczeForm
 from ..models import Mecze, Turnieje
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="login")
 def mecze_view(request, turniej_id):
     print(request.user)
     mecze = Mecze.objects.filter(id_turnieju=turniej_id)
@@ -18,6 +20,7 @@ def mecze_view(request, turniej_id):
     return render(request, 'szczegoly_turnieju.html', data)
 
 
+@login_required(login_url="login")
 def edytuj_mecz_view(request, id_meczu):  # TODO: zapisywanie zmienionych danych
     print(request.user)
     mecz = Mecze.objects.get(id=id_meczu)

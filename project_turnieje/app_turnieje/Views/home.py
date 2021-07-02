@@ -1,5 +1,4 @@
 import datetime
-
 import pytz as pytz
 from django.shortcuts import render
 from ..models import Turnieje

@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from ..models import Turnieje
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="login")
 def szukaj_list_view(request):
     print(request.user)
     print("GET")
