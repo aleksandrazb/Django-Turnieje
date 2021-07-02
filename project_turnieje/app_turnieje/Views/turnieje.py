@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url="login")
 def turnieje_view(request):
     print(request.user)
-    turnieje = Turnieje.objects.all()
+    turnieje = Turnieje.objects.filter(autor=request.user)
 
     data = {
         'turnieje': turnieje,
