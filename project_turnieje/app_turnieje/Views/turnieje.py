@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from ..forms import TurniejeForm
 from ..models import Turnieje, Uzytkownicy
 from django.contrib.auth.decorators import login_required
+import datetime
+import pytz as pytz
 
 
 @login_required(login_url="login")
@@ -39,11 +41,8 @@ def usun_turniej_view(request, turniej_id):
     print(request.user)
     turnieje = Turnieje.objects.all()
     turniej = Turnieje.objects.get(id=turniej_id)
-    turniej.delete()
-
-    data = {
-        'turnieje': turnieje,
-        'name': request.user,
-        'title': 'Usunięto'
-    }
+    teraz = datetime.datetime.now()
+    teraz = pytz.utc.localize(teraz)
+    if turniej.data_rozpoczecia > teraz:
+        turniej.delete()
     return redirect(turnieje_view)
