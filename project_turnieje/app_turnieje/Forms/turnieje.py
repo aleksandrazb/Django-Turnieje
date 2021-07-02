@@ -10,5 +10,6 @@ class TurniejeForm(forms.ModelForm):
         fields = [
             'nazwa',
             'ilosc_graczy',
-            'data_rozpoczecia'
+            'data_rozpoczecia',
+            'autor'
         ]

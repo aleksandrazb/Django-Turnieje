@@ -12,8 +12,8 @@ class Turnieje(models.Model):
                                                 (14, '14'), (16, '16'), (18, '18'), (20, '20'), (22, '22'),
                                                 (24, '24')])
     data_rozpoczecia = models.DateTimeField()
-    #autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    autor = models.CharField(max_length=50, default="Anonymus")
+    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    #autor = models.CharField(max_length=50, default="Anonymus")
 
     def get_absolute_url(self):
         return reverse('turniej_detail', kwargs={'pk': self.id})
