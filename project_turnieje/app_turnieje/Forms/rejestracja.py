@@ -1,9 +1,16 @@
 from django import forms
 from ..models import Uzytkownicy
-from django.contrib.auth.models import BaseUserManager
 
 
 class RejestracjaForm(forms.ModelForm):
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super(RejestracjaForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
 
     class Meta:
         model = Uzytkownicy

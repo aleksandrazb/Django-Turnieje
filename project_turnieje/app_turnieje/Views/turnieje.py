@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from ..forms import TurniejeForm
-from ..models import Turnieje
+from ..models import Turnieje, Uzytkownicy
 
 
 def turnieje_view(request):
@@ -17,12 +17,15 @@ def turnieje_view(request):
 
 def turniej_create_view(request):
     print(request.user)
-    form = TurniejeForm(request.POST or None)
+    init = {
+        'autor': Uzytkownicy.objects.filter(login=request.user).first()
+    }
+    form = TurniejeForm(request.POST or None, initial=init)
     if form.is_valid():
         form.save()
     data = {
         'form': form,
-        'name': request.user,
+        'name': request.user.login,
         'title': 'Stwórz turniej'
     }
     return render(request, 'stworz_turniej.html', data)

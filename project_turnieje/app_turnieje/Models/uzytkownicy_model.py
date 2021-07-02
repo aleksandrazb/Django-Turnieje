@@ -10,7 +10,7 @@ class Uzytkownicy(AbstractBaseUser, PermissionsMixin):
     #password = models.CharField(max_length=1024)
     email = models.EmailField(max_length=254, null=True, blank=True)
     data_urodzenia = models.DateField()
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     #has_module_perms = models.BooleanField(default=False)

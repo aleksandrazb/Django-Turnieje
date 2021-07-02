@@ -4,6 +4,7 @@ from ..models import Turnieje
 
 class TurniejeForm(forms.ModelForm):
     data_rozpoczecia = forms.DateTimeField(input_formats=["%d.%m.%Y %H:%M", "%d.%m.%Y %H.%M"])
+    autor = forms.CharField(disabled=True)
 
     class Meta:
         model = Turnieje

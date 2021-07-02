@@ -2,7 +2,7 @@ from django.shortcuts import render
 from ..forms import RejestracjaForm
 
 
-def register_user(request): # TODO: logowanie i wylogowywanie i przydział czynności (is_staff=True?)
+def register_user(request): # TODO: logowanie i wylogowywanie i przydział czynności
     print(request.user)
     form = RejestracjaForm(request.POST or None)
 
