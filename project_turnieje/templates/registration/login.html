@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST" class="form-group" xmlns="http://www.w3.org/1999/html"> {% csrf_token %}
+    {{form}}
+    <input type="submit" class="btn btn-success" value="Zaloguj">
+</form>
+{% endblock %}

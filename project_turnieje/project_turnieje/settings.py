@@ -116,3 +116,6 @@ STATIC_URL = '/static/'
 
 # custom user model
 AUTH_USER_MODEL = 'app_turnieje.Uzytkownicy'
+
+# redirect after login
+LOGIN_REDIRECT_URL = "/home"
