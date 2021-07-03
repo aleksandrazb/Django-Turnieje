@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from ..forms import RejestracjaForm
 
 
@@ -8,6 +8,7 @@ def register_user(request): # TODO: logowanie i wylogowywanie i przydział czynn
 
     if form.is_valid():
         form.save()
+        return redirect('/login')
 
     data = {
         'form': form,
