@@ -75,17 +75,16 @@ def edytuj_mecz_view(request, id_meczu):  # TODO: zapisywanie zmienionych danych
 def dodaj_mecz_view(request, turniej_id):   # TODO: naprawić problem z error valid
     print(request.user)
     init = {
-        'id_turnieju': Turnieje.objects.filter(id=turniej_id).first()
+        'id_turnieju': turniej_id
     }
-    form = MeczeForm(initial=init)
+
+    #form = MeczeForm(initial=init)
+    form = MeczeForm(request.POST or None)
 
     if form.is_valid():
-        print("valid")
-        form = MeczeForm(request.POST or None)
+        #form = MeczeForm(request.POST or None)
         form.save()
-        return redirect(mecze_view)
-    else:
-        print("error valid")
+        return redirect('/lista_turniejow/' + str(turniej_id))
     data = {
         'form': form,
         'turniej_id': turniej_id,
