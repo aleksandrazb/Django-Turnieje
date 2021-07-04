@@ -19,7 +19,7 @@
             <td>{{ turniej.ilosc_graczy }}</td>
             <td>{{ turniej.data_rozpoczecia }}</td>
             <td>{{ turniej.autor }}</td>
-            <td><form action="{% url 'mecze_view' turniej.id %}" method="POST"> {% csrf_token %}
+            <td><form action="{% url 'mecze_view' turniej.id %}" method="GET"> {% csrf_token %}
                     <button type="submit">Szczegóły</button>
             </form></td>
             <td><form action="{% url 'usun_turniej_view' turniej.id %}" method="POST"> {% csrf_token %}
