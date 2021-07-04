@@ -20,7 +20,7 @@
         </tr>
         {% endfor %}
     </table>
-    <form action="{% url 'dodaj_gracza_view' %}" method="POST"> {% csrf_token %}
+    <form action="{% url 'dodaj_gracza_view' %}" method="GET"> {% csrf_token %}
         <button type="submit">Dodaj gracza</button>
     </form>
 {% else %}

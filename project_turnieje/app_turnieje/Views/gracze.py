@@ -22,11 +22,14 @@ def gracze_view(request):
 @login_required(login_url="login")
 def dodaj_gracza_view(request):
     print(request.user)
-    form = GraczeForm(request.POST or None)
+    form = GraczeForm(request.GET or None)
 
-    if form.is_valid():
-        form.save()
-        return redirect(gracze_view)
+    if request.POST:
+        form = GraczeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(gracze_view)
+
     data = {
         'form': form,
         'name': request.user,
