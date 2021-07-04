@@ -47,9 +47,32 @@
     </form>
 
     </br>
+
+    <h5>Lista graczy w turnieju</h5><br>
+    <table border='1'>
+        <tr>
+            <th>ID</th>
+            <th>ID turnieju</th>
+            <th>Imię i nazwisko</th>
+        </tr>
+        {%  for gracz in gracze_w_turnieju %}
+        <tr>
+            <td>{{ gracz.id }}</td>
+            <td>{{ gracz.turniej }}</td>
+            <td>{{ gracz.gracz }}</td>
+            <td><form action="{% url 'usun_gracza_view' gracz.id %}" method="POST"> {% csrf_token %}
+                    <button type="submit">Usuń gracza</button>
+            </form></td>
+        </tr>
+        {% endfor %}
+    </table></br>
+
     <form action="{% url 'dodaj_gracza_do_turnieju_view' turniej_id %}" method="POST"> {% csrf_token %}
         <button type="submit">Dodaj gracza do turnieju</button>
     </form>
+
+
+
 {% else %}
     <a href="/login">Zaloguj się</a>
 {% endif %}

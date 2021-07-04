@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from ..forms import MeczeForm
-from ..models import Mecze, Turnieje
+from ..models import Mecze, Turnieje, GraczeWTurnieju
 from django.contrib.auth.decorators import login_required
 import datetime
 import pytz as pytz
@@ -13,11 +13,16 @@ def mecze_view(request, turniej_id):
     turnieje = Turnieje.objects.filter(id=turniej_id)
     turniej = Turnieje.objects.get(id=turniej_id)
     print(turnieje)
+
+    gracze_w_turnieju = GraczeWTurnieju.objects.filter(turniej=turniej)
+    print(gracze_w_turnieju)
+
     teraz = datetime.datetime.now()
     teraz = pytz.utc.localize(teraz)
     if turniej.data_rozpoczecia > teraz:
         data = {
             'mecze': mecze,
+            'gracze_w_turnieju': gracze_w_turnieju,
             'turnieje': turnieje,
             'turniej_id': turniej_id,
             'name': request.user,
