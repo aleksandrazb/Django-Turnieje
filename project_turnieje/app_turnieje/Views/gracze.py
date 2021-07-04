@@ -1,9 +1,8 @@
 import datetime
 import pytz as pytz
 from django.shortcuts import render, redirect
-from ..forms import GraczeForm
-from ..models import Gracze
-from ..models import Turnieje
+from ..forms import GraczeForm, GraczeWTurniejuForm
+from ..models import Gracze, GraczeWTurnieju
 from django.contrib.auth.decorators import login_required
 
 
@@ -46,3 +45,19 @@ def usun_gracza_view(request, gracz_id):
     gracz.delete()
 
     return redirect(gracze_view)
+
+
+@login_required(login_url="login")
+def dodaj_gracza_do_turnieju_view(request, turniej_id):
+    print(request.user)
+    form = GraczeWTurniejuForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('/lista_turniejow/' + str(turniej_id))
+    data = {
+        'form': form,
+        'name': request.user,
+        'title': 'Dodaj gracza do turnieju'
+    }
+    return render(request, 'dodaj_gracza.html', data)

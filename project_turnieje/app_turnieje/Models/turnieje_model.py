@@ -16,7 +16,7 @@ class Turnieje(models.Model):
     autor = models.CharField(max_length=50, default="Anonymus")
 
     def get_absolute_url(self):
-        return reverse('turniej_detail', kwargs={'pk': self.id})
+        return reverse('turniej_detail', kwargs={'pk': self.nazwa})
 
     def __str__(self):
-        return str(self.id)
+        return str(self.nazwa)

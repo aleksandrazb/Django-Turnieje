@@ -6,6 +6,5 @@ class GraczeForm(forms.ModelForm):
     class Meta:
         model = Gracze
         fields = [
-            'imie',
-            'nazwisko'
+            'imie_nazwisko'
         ]

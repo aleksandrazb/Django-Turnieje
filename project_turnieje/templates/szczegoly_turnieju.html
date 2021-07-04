@@ -45,6 +45,11 @@
     <form action="{% url 'dodaj_mecz_view' turniej_id %}" method="POST"> {% csrf_token %}
         <button type="submit">Dodaj mecz</button>
     </form>
+
+    </br>
+    <form action="{% url 'dodaj_gracza_do_turnieju_view' turniej_id %}" method="POST"> {% csrf_token %}
+        <button type="submit">Dodaj gracza do turnieju</button>
+    </form>
 {% else %}
     <a href="/login">Zaloguj się</a>
 {% endif %}

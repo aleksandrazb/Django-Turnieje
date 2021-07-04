@@ -8,14 +8,12 @@
     <table border='1'>
         <tr>
             <th>ID</th>
-            <th>Imię</th>
-            <th>Nazwisko</th>
+            <th>Imię i nazwisko</th>
         </tr>
         {%  for gracz in gracze %}
         <tr>
             <td>{{ gracz.id }}</td>
-            <td>{{ gracz.imie }}</td>
-            <td>{{ gracz.nazwisko }}</td>
+            <td>{{ gracz.imie_nazwisko }}</td>
             <td><form action="{% url 'usun_gracza_view' gracz.id %}" method="POST"> {% csrf_token %}
                     <button type="submit">Usuń gracza</button>
             </form></td>
