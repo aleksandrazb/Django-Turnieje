@@ -34,7 +34,7 @@ def mecze_view(request, turniej_id):
 
 
 @login_required(login_url="login")
-def edytuj_mecz_view(request, id_meczu):  # TODO: zapisywanie zmienionych danych
+def edytuj_mecz_view(request, id_meczu, turniej_id):  # TODO: zapisywanie zmienionych danych
     print(request.user)
     mecz = Mecze.objects.get(id=id_meczu)
     init = {
@@ -47,28 +47,21 @@ def edytuj_mecz_view(request, id_meczu):  # TODO: zapisywanie zmienionych danych
         'wygrana': mecz.wygrana
     }
     print(init)
-    form = MeczeForm(initial=init)
+    form = MeczeForm(request.POST or None, instance=mecz)
 
     if request.POST:
         if form.is_valid():
-            form = MeczeForm(request.POST or None)
+            #form = MeczeForm(request.POST or None)
             form.save()
+            return redirect('/lista_turniejow/' + str(turniej_id))
 
-        data = {
-            'form': form,
-            'name': request.user,
-            'title': 'Edytuj mecz',
-            'edit': mecz
-        }
-        return render(request, 'edytuj_mecz.html', data)
-    else:
-        data = {
-            'form': form,
-            'name': request.user,
-            'title': 'Edytuj mecz',
-            'edit': mecz
-        }
-        return render(request, 'edytuj_mecz.html', data)
+    data = {
+        'form': form,
+        'name': request.user,
+        'title': 'Edytuj mecz',
+        'edit': mecz
+    }
+    return render(request, 'edytuj_mecz.html', data)
 
 
 @login_required(login_url="login")

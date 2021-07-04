@@ -30,7 +30,7 @@ urlpatterns = [
     path('lista_graczy/', views.gracze_view, name='gracze_view'),
     path('usun_gracza/<gracz_id>/', views.usun_gracza_view, name='usun_gracza_view'),
     path('lista_turniejow/<turniej_id>/', views.mecze_view, name='mecze_view'),
-    path('edytuj_mecz/<id_meczu>/', views.edytuj_mecz_view, name='edytuj_mecz_view'),
+    path('edytuj_mecz/<id_meczu>/<turniej_id>', views.edytuj_mecz_view, name='edytuj_mecz_view'),
     path('dodaj_mecz/<turniej_id>/', views.dodaj_mecz_view, name='dodaj_mecz_view'),
     path('usun_mecz/<id_meczu>/<turniej_id>', views.usun_mecz_view, name='usun_mecz_view'),
 
