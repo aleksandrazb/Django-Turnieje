@@ -36,4 +36,5 @@ urlpatterns = [
 
     path('dodaj_gracza/<turniej_id>/', views.dodaj_gracza_do_turnieju_view, name='dodaj_gracza_do_turnieju_view'),
     path('usun_gracza/<id>/<turniej_id>/', views.usun_gracza_z_turnieju_view, name='usun_gracza_z_turnieju_view'),
+    path('paruj_graczy/<turniej_id>/', views.paruj_graczy_turnieju_view, name='paruj_graczy_turnieju_view'),
 ]

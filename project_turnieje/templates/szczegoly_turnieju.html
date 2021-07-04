@@ -50,6 +50,9 @@
         <form action="{% url 'dodaj_mecz_view' turniej_id %}" method="GET"> {% csrf_token %}
             <button type="submit">Dodaj mecz</button>
         </form>
+        <form action="{% url 'paruj_graczy_turnieju_view' turniej_id %}" method="POST"> {% csrf_token %}
+            <button type="submit">Paruj graczy do FAZY 1</button>
+        </form>
     {% endif %}
     </br>
 

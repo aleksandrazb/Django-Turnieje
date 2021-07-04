@@ -1,8 +1,10 @@
 import datetime
+import random
+
 import pytz as pytz
 from django.shortcuts import render, redirect
-from ..forms import GraczeForm, GraczeWTurniejuForm
-from ..models import Gracze, GraczeWTurnieju
+from ..forms import GraczeForm, GraczeWTurniejuForm, MeczeForm
+from ..models import Gracze, GraczeWTurnieju, Turnieje, Mecze
 from django.contrib.auth.decorators import login_required
 
 
@@ -77,4 +79,26 @@ def usun_gracza_z_turnieju_view(request, id, turniej_id):
     print(request.user)
     gracz_w_turnieju = GraczeWTurnieju.objects.get(id=id)
     gracz_w_turnieju.delete()
+    return redirect('/lista_turniejow/' + str(turniej_id))
+
+
+@login_required(login_url="login")
+def paruj_graczy_turnieju_view(request, turniej_id):
+    print(request.user)
+    turniej = Turnieje.objects.get(id=turniej_id)
+    gracze_w_turnieju = GraczeWTurnieju.objects.filter(turniej=turniej_id)
+    lista_graczy = []
+    for gracz in gracze_w_turnieju:
+        lista_graczy.append(gracz)
+    if turniej.ilosc_graczy > len(lista_graczy):
+        liczba_meczy = len(lista_graczy)//2
+    else:
+        liczba_meczy = turniej.ilosc_graczy//2
+    for mecz in range(liczba_meczy):
+        para = random.sample(set(lista_graczy), 2)
+        print(para)
+        Mecze.objects.create(id_turnieju=turniej, faza=1, id_gracza1=para[0].gracz, id_gracza2=para[1].gracz)
+        lista_graczy.remove(para[0])
+        lista_graczy.remove(para[1])
+
     return redirect('/lista_turniejow/' + str(turniej_id))
