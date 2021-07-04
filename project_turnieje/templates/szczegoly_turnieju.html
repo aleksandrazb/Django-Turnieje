@@ -32,7 +32,7 @@
             <td>{{ mecz.wynik_gracza1 }}</td>
             <td>{{ mecz.wynik_gracza2 }}</td>
             <td>{{ mecz.wygrana }}</td>
-            <td><form action="{% url 'edytuj_mecz_view' mecz.id turniej_id %}" method="POST"> {% csrf_token %}
+            <td><form action="{% url 'edytuj_mecz_view' mecz.id turniej_id %}" method="GET"> {% csrf_token %}
                     <button type="submit">Edytuj</button>
             </form>
             <form action="{% url 'usun_mecz_view' mecz.id turniej_id %}" method="POST"> {% csrf_token %}

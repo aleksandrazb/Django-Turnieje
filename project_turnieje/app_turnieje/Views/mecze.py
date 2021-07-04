@@ -46,14 +46,22 @@ def edytuj_mecz_view(request, id_meczu, turniej_id):  # TODO: zapisywanie zmieni
         'wynik_gracza2': mecz.wynik_gracza2,
         'wygrana': mecz.wygrana
     }
-    print(init)
-    form = MeczeForm(request.POST or None, instance=mecz)
+    print("FORM")
+    form = MeczeForm(request.GET, instance=mecz, initial=init)
+    print(form.is_valid())
 
     if request.POST:
+        #form = MeczeForm(request.POST or None, instance=mecz)
+        print("----------------------request.POST")
+        print(form.is_valid())
         if form.is_valid():
-            #form = MeczeForm(request.POST or None)
-            form.save()
-            return redirect('/lista_turniejow/' + str(turniej_id))
+            form = MeczeForm(request.POST or None, instance=mecz)
+            if form.is_valid():
+                form.save()
+                return redirect('/lista_turniejow/' + str(turniej_id))
+            else:
+                print("-------------------------IS NOT VALID")
+                print(form)
 
     data = {
         'form': form,
