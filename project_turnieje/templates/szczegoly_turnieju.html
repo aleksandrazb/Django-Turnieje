@@ -35,7 +35,7 @@
             <td><form action="{% url 'edytuj_mecz_view' mecz.id %}" method="POST"> {% csrf_token %}
                     <button type="submit">Edytuj</button>
             </form>
-            <form action="{% url 'usun_mecz_view' mecz.id %}" method="POST"> {% csrf_token %}
+            <form action="{% url 'usun_mecz_view' mecz.id turniej_id %}" method="POST"> {% csrf_token %}
                     <button type="submit">Usun</button>
             </form></td>
         </tr>

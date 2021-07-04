@@ -72,7 +72,7 @@ def edytuj_mecz_view(request, id_meczu):  # TODO: zapisywanie zmienionych danych
 
 
 @login_required(login_url="login")
-def dodaj_mecz_view(request, turniej_id):   # TODO: naprawić problem z error valid
+def dodaj_mecz_view(request, turniej_id):
     print(request.user)
     init = {
         'id_turnieju': turniej_id
@@ -95,15 +95,9 @@ def dodaj_mecz_view(request, turniej_id):   # TODO: naprawić problem z error va
 
 
 @login_required(login_url="login")
-def usun_mecz_view(request, id_meczu):
+def usun_mecz_view(request, id_meczu, turniej_id):
     print(request.user)
-
     mecz = Mecze.objects.get(id=id_meczu)
     mecz.delete()
-
-    data = {
-        'name': request.user.login,
-        'title': 'Szczegóły turnieju'
-    }
-    return redirect(mecze_view)
+    return redirect('/lista_turniejow/' + str(turniej_id))
 
