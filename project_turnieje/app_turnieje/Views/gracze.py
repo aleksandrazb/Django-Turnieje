@@ -54,11 +54,11 @@ def dodaj_gracza_do_turnieju_view(request, turniej_id):
         'turniej': turniej_id
     }
 
-    #form = GraczeWTurniejuForm(initial=init)
+    # form = GraczeWTurniejuForm(initial=init)
     form = GraczeWTurniejuForm(request.POST or None)
 
     if form.is_valid():
-        #form = GraczeWTurniejuForm(request.POST or None)
+        # form = GraczeWTurniejuForm(request.POST or None)
         form.save()
         return redirect('/lista_turniejow/' + str(turniej_id))
     data = {
@@ -69,17 +69,9 @@ def dodaj_gracza_do_turnieju_view(request, turniej_id):
     return render(request, 'dodaj_gracza.html', data)
 
 
-# @login_required(login_url="login")
-# def gracze_w_turnieju_view(request, turniej_id):
-#     print(request.user)
-#     form = GraczeWTurniejuForm(request.POST or None)
-#
-#     if form.is_valid():
-#         form.save()
-#         return redirect('/lista_turniejow/' + str(turniej_id))
-#     data = {
-#         'form': form,
-#         'name': request.user,
-#         'title': 'Dodaj gracza do turnieju'
-#     }
-#     return render(request, 'dodaj_gracza.html', data)
+@login_required(login_url="login")
+def usun_gracza_z_turnieju_view(request, id, turniej_id):
+    print(request.user)
+    gracz_w_turnieju = GraczeWTurnieju.objects.get(id=id)
+    gracz_w_turnieju.delete()
+    return redirect('/lista_turniejow/' + str(turniej_id))

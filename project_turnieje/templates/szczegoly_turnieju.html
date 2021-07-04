@@ -60,8 +60,8 @@
             <td>{{ gracz.id }}</td>
             <td>{{ gracz.turniej }}</td>
             <td>{{ gracz.gracz }}</td>
-            <td><form action="{% url 'usun_gracza_view' gracz.id %}" method="POST"> {% csrf_token %}
-                    <button type="submit">Usuń gracza</button>
+            <td><form action="{% url 'usun_gracza_z_turnieju_view' gracz.id turniej_id %}" method="POST"> {% csrf_token %}
+                    <button type="submit">Usuń gracza z turnieju</button>
             </form></td>
         </tr>
         {% endfor %}

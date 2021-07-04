@@ -35,4 +35,5 @@ urlpatterns = [
     path('usun_mecz/<id_meczu>/', views.usun_mecz_view, name='usun_mecz_view'),
 
     path('dodaj_gracza/<turniej_id>/', views.dodaj_gracza_do_turnieju_view, name='dodaj_gracza_do_turnieju_view'),
+    path('usun_gracza/<id>/<turniej_id>/', views.usun_gracza_z_turnieju_view, name='usun_gracza_z_turnieju_view'),
 ]
