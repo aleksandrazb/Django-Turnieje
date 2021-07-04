@@ -33,7 +33,6 @@ urlpatterns = [
     path('edytuj_mecz/<id_meczu>/<turniej_id>', views.edytuj_mecz_view, name='edytuj_mecz_view'),
     path('dodaj_mecz/<turniej_id>/', views.dodaj_mecz_view, name='dodaj_mecz_view'),
     path('usun_mecz/<id_meczu>/<turniej_id>', views.usun_mecz_view, name='usun_mecz_view'),
-
     path('dodaj_gracza/<turniej_id>/', views.dodaj_gracza_do_turnieju_view, name='dodaj_gracza_do_turnieju_view'),
     path('usun_gracza/<id>/<turniej_id>/', views.usun_gracza_z_turnieju_view, name='usun_gracza_z_turnieju_view'),
     path('paruj_graczy/<turniej_id>/', views.paruj_graczy_turnieju_view, name='paruj_graczy_turnieju_view'),

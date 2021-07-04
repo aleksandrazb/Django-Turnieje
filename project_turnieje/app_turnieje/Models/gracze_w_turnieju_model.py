@@ -3,6 +3,7 @@ from django.urls import reverse
 
 
 class GraczeWTurnieju(models.Model):
+    objects = ['id', 'turniej', 'gracz']
     id = models.AutoField(db_index=True, primary_key=True)
     turniej = models.ForeignKey('Turnieje', on_delete=models.CASCADE)
     gracz = models.ForeignKey('Gracze', on_delete=models.CASCADE)

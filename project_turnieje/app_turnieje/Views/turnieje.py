@@ -10,7 +10,6 @@ import pytz as pytz
 def turnieje_view(request):
     print(request.user)
     turnieje = Turnieje.objects.filter(autor=request.user)
-
     data = {
         'turnieje': turnieje,
         'name': request.user,
@@ -40,7 +39,6 @@ def turniej_create_view(request):
 @login_required(login_url="login")
 def usun_turniej_view(request, turniej_id):
     print(request.user)
-    turnieje = Turnieje.objects.all()
     turniej = Turnieje.objects.get(id=turniej_id)
     teraz = datetime.datetime.now()
     teraz = pytz.utc.localize(teraz)

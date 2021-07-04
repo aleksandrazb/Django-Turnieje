@@ -1,9 +1,6 @@
-import datetime
 import random
-
-import pytz as pytz
 from django.shortcuts import render, redirect
-from ..forms import GraczeForm, GraczeWTurniejuForm, MeczeForm
+from ..forms import GraczeForm, GraczeWTurniejuForm
 from ..models import Gracze, GraczeWTurnieju, Turnieje, Mecze
 from django.contrib.auth.decorators import login_required
 
@@ -12,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 def gracze_view(request):
     print(request.user)
     gracze = Gracze.objects.all()
-
     data = {
         'gracze': gracze,
         'name': request.user,
@@ -25,13 +21,11 @@ def gracze_view(request):
 def dodaj_gracza_view(request):
     print(request.user)
     form = GraczeForm(request.GET or None)
-
     if request.POST:
         form = GraczeForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect(gracze_view)
-
     data = {
         'form': form,
         'name': request.user,
@@ -43,27 +37,16 @@ def dodaj_gracza_view(request):
 @login_required(login_url="login")
 def usun_gracza_view(request, gracz_id):
     print(request.user)
-    print("USUN GRACZA")
     gracz = Gracze.objects.get(id=gracz_id)
-    print("gracz")
-    print(gracz)
     gracz.delete()
-
     return redirect(gracze_view)
 
 
 @login_required(login_url="login")
 def dodaj_gracza_do_turnieju_view(request, turniej_id):
     print(request.user)
-    init = {
-        'turniej': turniej_id
-    }
-
-    # form = GraczeWTurniejuForm(initial=init)
     form = GraczeWTurniejuForm(request.POST or None)
-
     if form.is_valid():
-        # form = GraczeWTurniejuForm(request.POST or None)
         form.save()
         return redirect('/lista_turniejow/' + str(turniej_id))
     data = {
@@ -96,9 +79,7 @@ def paruj_graczy_turnieju_view(request, turniej_id):
         liczba_meczy = turniej.ilosc_graczy//2
     for mecz in range(liczba_meczy):
         para = random.sample(set(lista_graczy), 2)
-        print(para)
         Mecze.objects.create(id_turnieju=turniej, faza=1, id_gracza1=para[0].gracz, id_gracza2=para[1].gracz)
         lista_graczy.remove(para[0])
         lista_graczy.remove(para[1])
-
     return redirect('/lista_turniejow/' + str(turniej_id))

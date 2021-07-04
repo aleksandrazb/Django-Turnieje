@@ -1,13 +1,9 @@
 from django import forms
-from django.forms import TextInput
 from django.utils.datastructures import MultiValueDict
-
 from ..models import Mecze
 
 
 class MeczeForm(forms.ModelForm):
-    #id_turnieju = forms.CharField(disabled=True)
-
     def __init__(self, data, **kwargs):
         initial = kwargs.get('initial', {})
         data = MultiValueDict({**{k: [v] for k, v in initial.items()}, **data})

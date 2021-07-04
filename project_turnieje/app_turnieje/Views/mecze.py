@@ -12,11 +12,7 @@ def mecze_view(request, turniej_id):
     mecze = Mecze.objects.filter(id_turnieju=turniej_id)
     turnieje = Turnieje.objects.filter(id=turniej_id)
     turniej = Turnieje.objects.get(id=turniej_id)
-    print(turnieje)
-
     gracze_w_turnieju = GraczeWTurnieju.objects.filter(turniej=turniej)
-    print(gracze_w_turnieju)
-
     teraz = datetime.datetime.now()
     teraz = pytz.utc.localize(teraz)
     if turniej.data_rozpoczecia > teraz:
@@ -43,7 +39,7 @@ def mecze_view(request, turniej_id):
 
 
 @login_required(login_url="login")
-def edytuj_mecz_view(request, id_meczu, turniej_id):  # TODO: zapisywanie zmienionych danych
+def edytuj_mecz_view(request, id_meczu, turniej_id):
     print(request.user)
     mecz = Mecze.objects.get(id=id_meczu)
     init = {
@@ -55,23 +51,13 @@ def edytuj_mecz_view(request, id_meczu, turniej_id):  # TODO: zapisywanie zmieni
         'wynik_gracza2': mecz.wynik_gracza2,
         'wygrana': mecz.wygrana
     }
-    print("FORM")
     form = MeczeForm(request.GET, instance=mecz, initial=init)
-    print(form.is_valid())
-
     if request.POST:
-        #form = MeczeForm(request.POST or None, instance=mecz)
-        print("----------------------request.POST")
-        print(form.is_valid())
         if form.is_valid():
             form = MeczeForm(request.POST or None, instance=mecz)
             if form.is_valid():
                 form.save()
                 return redirect('/lista_turniejow/' + str(turniej_id))
-            else:
-                print("-------------------------IS NOT VALID")
-                print(form)
-
     data = {
         'form': form,
         'name': request.user,
@@ -94,16 +80,12 @@ def dodaj_mecz_view(request, turniej_id):
            'wynik_gracza2': None,
            'wygrana': None
     }
-
-    #form = MeczeForm(initial=init)
     form = MeczeForm(request.GET, initial=init)
-
     if request.POST:
         form = MeczeForm(request.POST or None)
         if form.is_valid():
             form.save()
             return redirect('/lista_turniejow/' + str(turniej_id))
-
     data = {
         'form': form,
         'turniej_id': turniej_id,

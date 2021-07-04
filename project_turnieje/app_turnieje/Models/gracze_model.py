@@ -3,8 +3,8 @@ from django.urls import reverse
 
 
 class Gracze(models.Model):
+    objects = ['id', 'imie_nazwisko']
     id = models.AutoField(db_index=True, primary_key=True)
-    #imie = models.CharField(max_length=50)
     imie_nazwisko = models.CharField(max_length=50, blank=False, null=False)
 
     def get_absolute_url(self):
