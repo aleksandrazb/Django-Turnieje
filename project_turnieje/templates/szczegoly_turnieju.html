@@ -42,7 +42,7 @@
         {% endfor %}
     </table>
     </br>
-    <form action="{% url 'dodaj_mecz_view' turniej_id %}" method="POST"> {% csrf_token %}
+    <form action="{% url 'dodaj_mecz_view' turniej_id %}" method="GET"> {% csrf_token %}
         <button type="submit">Dodaj mecz</button>
     </form>
 

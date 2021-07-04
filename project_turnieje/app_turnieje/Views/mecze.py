@@ -75,17 +75,26 @@ def edytuj_mecz_view(request, id_meczu, turniej_id):  # TODO: zapisywanie zmieni
 @login_required(login_url="login")
 def dodaj_mecz_view(request, turniej_id):
     print(request.user)
+    turniej = Turnieje.objects.get(id=turniej_id)
     init = {
-        'id_turnieju': turniej_id
+        'id_turnieju': turniej.id,
+            'faza': None,
+           'id_gracza1': None,
+           'id_gracza2': None,
+           'wynik_gracza1': None,
+           'wynik_gracza2': None,
+           'wygrana': None
     }
 
     #form = MeczeForm(initial=init)
-    form = MeczeForm(request.POST or None)
+    form = MeczeForm(request.GET, initial=init)
 
-    if form.is_valid():
-        #form = MeczeForm(request.POST or None)
-        form.save()
-        return redirect('/lista_turniejow/' + str(turniej_id))
+    if request.POST:
+        form = MeczeForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+            return redirect('/lista_turniejow/' + str(turniej_id))
+
     data = {
         'form': form,
         'turniej_id': turniej_id,
