@@ -26,11 +26,20 @@ def mecze_view(request, turniej_id):
             'turnieje': turnieje,
             'turniej_id': turniej_id,
             'name': request.user,
-            'title': 'Szczegóły turnieju'
+            'title': 'Szczegóły turnieju',
+            'rozpoczety': False
         }
-        return render(request, 'szczegoly_turnieju.html', data)
     else:
-        return redirect('/lista_turniejow')
+        data = {
+            'mecze': mecze,
+            'gracze_w_turnieju': gracze_w_turnieju,
+            'turnieje': turnieje,
+            'turniej_id': turniej_id,
+            'name': request.user,
+            'title': 'Szczegóły turnieju',
+            'rozpoczety': True
+        }
+    return render(request, 'szczegoly_turnieju.html', data)
 
 
 @login_required(login_url="login")
